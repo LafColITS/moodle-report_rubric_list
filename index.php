@@ -23,6 +23,7 @@
  */
 
 require_once(dirname(__FILE__) . '/../../config.php');
+require_once('./classes/rubric_list_table.php');
 
 $id = required_param('id', PARAM_INT);
 $course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
@@ -49,9 +50,10 @@ $table->set_sql(
     '{grading_definitions} gd JOIN {grading_areas} ga ON (gd.areaid =ga.id)
     JOIN {context} cx ON (ga.contextid = cx.id) JOIN {course_modules} cm ON cx.instanceid = cm.id
     JOIN {assign} a ON cm.instance = a.id JOIN {course} c ON a.course = c.id',
-    "gd.usercreated = '?'",
+    "gd.usercreated = ?",
     [$USER->id]
 );
+$table->define_baseurl("$CFG->wwwroot/report/rubric_list/index.php?id={$id}");
 $table->out(40, true);
 
 if (!$table->is_downloading()) {

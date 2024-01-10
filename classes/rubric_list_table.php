@@ -24,6 +24,8 @@
 
 namespace report_rubric_list;
 
+require "$CFG->libdir/tablelib.php";
+
 class table extends \table_sql {
 
     /**
@@ -34,7 +36,7 @@ class table extends \table_sql {
     function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('id', 'name', 'course', 'copiedfrom');
+        $columns = array('id', 'name', 'course', 'copiedfromid');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
@@ -55,7 +57,7 @@ class table extends \table_sql {
         if ($this->is_downloading()) {
             return $values->name;
         } else {
-            return '<a href="/grade/grading/manage.php?areaid='.$values->areaid.'">'.$values->name.'</a>';
+            return \html_writer::link(new \moodle_url("/grade/grading/manage.php", array('areaid' => $values->areaid)), $values->name);
         }
     }
 
@@ -64,7 +66,7 @@ class table extends \table_sql {
         if ($this->is_downloading()) {
             return $values->fullname;
         } else {
-            return '<a href="/course/view.php?id='.$values->courseid.'">'.$values->fullname.'</a>';
+            return \html_writer::link(new \moodle_url("/course/view.php", array('id' => $values->courseid)), $values->fullname);
         }        
     }
 }

@@ -103,7 +103,7 @@ class table extends \table_sql {
      * @param object $values Contains object with all the values of record.
      * @return $string Returns the formatted name of the activity module type.
      */
-    function col_modtype($values) {
+    protected function col_modtype($values) {
         return get_string('pluginname', "mod_{$values->modtype}");
     }
 

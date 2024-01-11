@@ -57,6 +57,7 @@ Feature: View all my rubrics
     And I am on the "Test assignment 3 name" "assign activity editing" page logged in as teacher2
     And I set the following fields to these values:
       | Grading method | Rubric |
+    And I press "Save and return to course"
     And I go to "Test assignment 3 name" advanced grading definition page
     And I set the following fields to these values:
       | Name | Assignment 3 rubric |
@@ -91,4 +92,4 @@ Feature: View all my rubrics
     And I navigate to "Reports" in current page administration
     And I click on "Rubric list" "link"
     And I should see "Assignment 3 rubric"
-    And I should not see "Assignment 1 rubric" 
+    And I should not see "Assignment 1 rubric"

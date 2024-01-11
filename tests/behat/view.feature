@@ -1,4 +1,4 @@
-@report_rubric_list
+@report @report_rubric_list
 Feature: View all my rubrics
   In order to clean up rubrics that I don't need
   As a teacher

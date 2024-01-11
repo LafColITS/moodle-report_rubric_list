@@ -76,7 +76,6 @@ Feature: View all my rubrics
     And I click on "Advanced grading" "link"
     And I set the following fields to these values:
       | Change active grading method to | Rubric |
-    And I press "Save and return to course"
     And I set "Test forum 2 name" activity to use "Assignment 3 rubric" grading form
 
   @javascript

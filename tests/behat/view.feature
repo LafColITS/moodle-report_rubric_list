@@ -34,6 +34,7 @@ Background:
     And I am on the "Test assignment 1 name" "assign activity editing" page logged in as teacher1
     And I set the following fields to these values:
       | Grading method | Rubric |
+    And I press "Save and return to course"
     And I go to "Test assignment 1 name" advanced grading definition page
     And I set the following fields to these values:
       | Name | Assignment 1 rubric |

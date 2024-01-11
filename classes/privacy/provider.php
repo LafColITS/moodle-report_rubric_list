@@ -15,16 +15,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'report_rubric_list', language 'en'
+ * Privacy implementation for report_rubric_list.
  *
  * @package   report_rubric_list
  * @copyright 2024 Lafayette College ITS
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['activity'] = 'Activity';
-$string['activity_type'] = 'Activity type';
-$string['last_updated'] = 'Last updated';
-$string['pluginname'] = 'Rubric list';
-$string['privacy:metadata'] = 'The rubric list report only shows data stored in other locations.';
-$string['rubric_list:view'] = 'View rubric list report';
+namespace report_rubric_list\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Privacy subsystem for report_rubric_list implementing null_provider.
+ *
+ * @copyright  2024 Lafayette College ITS
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

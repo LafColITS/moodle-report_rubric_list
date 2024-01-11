@@ -52,7 +52,7 @@ Feature: View all my rubrics
     And I am on the "Test forum 1 name" "forum activity editing" page
     And I click on "Advanced grading" "link"
     And I set the following fields to these values:
-      | Grading method | Rubric |
+      | Change active grading method to | Rubric |
     And I set "Test forum 1 name" activity to use "Assignment 1 rubric" grading form
     And I am on the "Test assignment 3 name" "assign activity editing" page logged in as teacher2
     And I set the following fields to these values:
@@ -74,7 +74,7 @@ Feature: View all my rubrics
     And I am on the "Test forum 2 name" "forum activity editing" page
     And I click on "Advanced grading" "link"
     And I set the following fields to these values:
-      | Grading method | Rubric |
+      | Change active grading method to | Rubric |
     And I press "Save and return to course"
     And I set "Test forum 2 name" activity to use "Assignment 3 rubric" grading form
 

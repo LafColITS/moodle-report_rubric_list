@@ -24,8 +24,17 @@
 
 namespace report_rubric_list;
 
-require "$CFG->libdir/tablelib.php";
+defined('MOODLE_INTERNAL') || die;
 
+require_once("$CFG->libdir/tablelib.php");
+
+/**
+ * Query database for rubrics and format output
+ *
+ * @package   report_rubric_list
+ * @copyright 2024 Lafayette College ITS
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class table extends \table_sql {
 
     /**
@@ -33,10 +42,10 @@ class table extends \table_sql {
      * @param int $uniqueid all tables have to have a unique id, this is used
      *      as a key when storing table properties like sort order in the session.
      */
-    function __construct($uniqueid) {
+    public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('id', 'name', 'timemodified', 'modtype', 'module', 'course');
+        $columns = array('name', 'timemodified', 'modtype', 'module', 'course');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
@@ -52,31 +61,61 @@ class table extends \table_sql {
 
     /**
      * This function is called for each data row to allow processing of the
-     * username value.
+     * rubric name value.
      *
      * @param object $values Contains object with all the values of record.
-     * @return $string Return username with link to profile or username only
+     * @return $string Return name of the rubric with link to grading area or name only
      *     when downloading.
      */
-    function col_name($values) {
+    protected function col_name($values) {
         // If the data is being downloaded than we don't want to show HTML.
         if ($this->is_downloading()) {
             return $values->name;
         } else {
-            return \html_writer::link(new \moodle_url("/grade/grading/manage.php", array('areaid' => $values->areaid)), $values->name);
+            return \html_writer::link(
+                new \moodle_url("/grade/grading/manage.php", array('areaid' => $values->areaid)),
+                $values->name
+            );
         }
     }
 
-    function col_course($values) {
+    /**
+     * This function is called for each data row to allow processing of the
+     * course name value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return $string Return name of the course where the rubric is used with link to the course or name only
+     *     when downloading.
+     */
+    protected function col_course($values) {
         // If the data is being downloaded than we don't want to show HTML.
         if ($this->is_downloading()) {
             return $values->fullname;
         } else {
             return \html_writer::link(new \moodle_url("/course/view.php", array('id' => $values->courseid)), $values->fullname);
-        }        
+        }
     }
 
-    function col_module($values) {
+    /**
+     * This function is called for each data row to allow processing of the
+     * modtype value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return $string Returns the formatted name of the activity module type.
+     */
+    function col_modtype($values) {
+        return get_string('pluginname', "mod_{$values->modtype}");
+    }
+
+    /**
+     * This function is called for each data row to allow processing of the
+     * module value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return $string Return name of the activity module associated with the rubric
+     * with link to the module grading area or name only when downloading.
+     */
+    protected function col_module($values) {
         switch($values->modtype) {
             case 'assign':
                 $id = $values->assignid;
@@ -98,7 +137,14 @@ class table extends \table_sql {
         }
     }
 
-    function col_timemodified($values) {
+    /**
+     * This function is called for each data row to allow processing of the
+     * timemodified value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return $string Return human readable date when the rubric was last modified.
+     */
+    protected function col_timemodified($values) {
         return userdate($values->timemodified);
     }
 }

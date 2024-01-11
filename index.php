@@ -31,6 +31,10 @@ $download = optional_param('download', '', PARAM_ALPHA);
 
 require_login($course);
 
+// Setup page.
+$PAGE->set_url('/report/rubric_list/index.php', array('id' => $course->id));
+$PAGE->set_pagelayout('report');
+
 // Check permissions.
 $coursecontext = context_course::instance($course->id);
 require_capability('report/rubric_list:view', $coursecontext);

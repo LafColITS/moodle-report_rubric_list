@@ -46,13 +46,15 @@ if (!$table->is_downloading()) {
 }
 
 $table->set_sql(
-    'gd.id, gd.areaid, gd.name, gd.copiedfromid, c.id as courseid, c.fullname',
-    '{grading_definitions} gd JOIN {grading_areas} ga ON (gd.areaid =ga.id)
-    JOIN {context} cx ON (ga.contextid = cx.id) JOIN {course_modules} cm ON cx.instanceid = cm.id
-    JOIN {assign} a ON cm.instance = a.id JOIN {course} c ON a.course = c.id',
+    "gd.id, gd.areaid, gd.name, gd.usercreated, gd.copiedfromid, gd.timemodified, c.id as courseid, c.fullname, m.name as modtype,
+    f.id as forumid, a.id as assignid, f.name as forum, a.name as assignment',
+    '{grading_definitions} gd JOIN {grading_areas} ga ON (gd.areaid =ga.id) JOIN {context} cx ON (ga.contextid = cx.id) JOIN {course_modules} cm
+    ON cx.instanceid = cm.id JOIN {course} c ON cm.course=c.id JOIN {modules} m ON cm.module=m.id LEFT JOIN {forum} f
+    ON (cm.instance=f.id AND m.name='forum') LEFT JOIN {assign} a ON (cm.instance=a.id AND m.name='assign')",
     "gd.usercreated = ?",
     [$USER->id]
 );
+$table->sortable(true, 'timemodified', SORT_DESC);
 $table->define_baseurl("$CFG->wwwroot/report/rubric_list/index.php?id={$id}");
 $table->out(40, true);
 

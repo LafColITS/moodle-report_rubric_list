@@ -36,11 +36,17 @@ class table extends \table_sql {
     function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('id', 'name', 'course', 'copiedfromid');
+        $columns = array('id', 'name', 'timemodified', 'modtype', 'module', 'course');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('ID', 'Name', 'Course', 'Copied from');
+        $headers = array(
+            get_string('rubric', 'gradingform_rubric'),
+            get_string('last_updated', 'report_rubric_list'),
+            get_string('activity_type', 'report_rubric_list'),
+            get_string('activity', 'report_rubric_list'),
+            get_string('course')
+        );
         $this->define_headers($headers);
     }
 
@@ -68,5 +74,31 @@ class table extends \table_sql {
         } else {
             return \html_writer::link(new \moodle_url("/course/view.php", array('id' => $values->courseid)), $values->fullname);
         }        
+    }
+
+    function col_module($values) {
+        switch($values->modtype) {
+            case 'assign':
+                $id = $values->assignid;
+                $name = $values->assignment;
+                $url = "/mod/assign/view.php";
+                break;
+            case 'forum':
+                $id = $values->forumid;
+                $name = $values->forum;
+                $url = "/mod/forum/view.php";
+                break;
+        }
+
+        // If the data is being downloaded than we don't want to show HTML.
+        if ($this->is_downloading()) {
+            return $name;
+        } else {
+            return \html_writer::link(new \moodle_url($url, array('id' => $id)), $name);
+        }
+    }
+
+    function col_timemodified($values) {
+        return userdate($values->timemodified);
     }
 }

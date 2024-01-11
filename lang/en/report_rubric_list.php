@@ -22,5 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- $string['pluginname'] = 'Rubric List';
- $string['rubric_list:view'] = 'View rubric list report';
+$string['activity'] = 'Activity';
+$string['activity_type'] = 'Activity type';
+$string['last_updated'] = 'Last updated';
+$string['pluginname'] = 'Rubric list';
+$string['rubric_list:view'] = 'View rubric list report';

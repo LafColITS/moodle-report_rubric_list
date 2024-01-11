@@ -50,7 +50,7 @@ Feature: View all my rubrics
     And I press "Save and return to course"
     And I set "Test assignment 2 name" activity to use "Assignment 1 rubric" grading form
     And I am on the "Test forum 1 name" "forum activity editing" page
-    And I click on 'Advanced grading'
+    And I click on "Advanced grading" "link"
     And I set the following fields to these values:
       | Grading method | Rubric |
     And I set "Test forum 1 name" activity to use "Assignment 1 rubric" grading form
@@ -72,7 +72,7 @@ Feature: View all my rubrics
     And I press "Save and return to course"
     And I set "Test assignment 4 name" activity to use "Assignment 3 rubric" grading form
     And I am on the "Test forum 2 name" "forum activity editing" page
-    And I click on 'Advanced grading'
+    And I click on "Advanced grading" "link"
     And I set the following fields to these values:
       | Grading method | Rubric |
     And I press "Save and return to course"

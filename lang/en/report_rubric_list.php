@@ -28,3 +28,4 @@ $string['last_updated'] = 'Last updated';
 $string['pluginname'] = 'Rubric list';
 $string['privacy:metadata'] = 'The rubric list report only shows data stored in other locations.';
 $string['rubric_list:view'] = 'View rubric list report';
+$string['rubric_list_filename'] = 'rubric_list';

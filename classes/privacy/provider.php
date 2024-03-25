@@ -24,8 +24,6 @@
 
 namespace report_rubric_list\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy subsystem for report_rubric_list implementing null_provider.
  *

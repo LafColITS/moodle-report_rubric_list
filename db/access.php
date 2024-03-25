@@ -24,14 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$capabilities = array(
-    'report/rubric_list:view' => array(
+$capabilities = [
+    'report/rubric_list:view' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
-        'archetypes' => array(
+        'archetypes' => [
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
-        ),
+        ],
         'clonepermissionsfrom' => 'moodle/site:viewreports',
-    )
-);
+    ]
+    ];

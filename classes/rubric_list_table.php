@@ -118,12 +118,12 @@ class table extends \table_sql {
     protected function col_module($values) {
         switch($values->modtype) {
             case 'assign':
-                $id = $values->assignid;
+                $id = $values->cmid;
                 $name = $values->assignment;
                 $url = "/mod/assign/view.php";
                 break;
             case 'forum':
-                $id = $values->forumid;
+                $id = $values->cmid;
                 $name = $values->forum;
                 $url = "/mod/forum/view.php";
                 break;

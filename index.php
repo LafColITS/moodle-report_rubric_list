@@ -50,8 +50,8 @@ if (!$table->is_downloading()) {
 }
 
 $table->set_sql(
-    "gd.id, gd.areaid, gd.name, gd.usercreated, gd.copiedfromid, gd.timemodified, c.id as courseid, c.fullname, m.name as modtype,
-    f.id as forumid, a.id as assignid, f.name as forum, a.name as assignment",
+    "gd.id, gd.areaid, gd.name, gd.usercreated, gd.copiedfromid, gd.timemodified, c.id as courseid, c.fullname, cm.id as cmid, m.name as modtype,
+    f.name as forum, a.name as assignment",
     "{grading_definitions} gd JOIN {grading_areas} ga ON (gd.areaid =ga.id) JOIN {context} cx ON (ga.contextid = cx.id)
     JOIN {course_modules} cm
     ON cx.instanceid = cm.id JOIN {course} c ON cm.course=c.id JOIN {modules} m ON cm.module=m.id LEFT JOIN {forum} f

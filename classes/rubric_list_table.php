@@ -45,17 +45,17 @@ class table extends \table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('name', 'timemodified', 'modtype', 'module', 'course');
+        $columns = ['name', 'timemodified', 'modtype', 'module', 'course'];
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(
+        $headers = [
             get_string('rubric', 'gradingform_rubric'),
             get_string('last_updated', 'report_rubric_list'),
             get_string('activity_type', 'report_rubric_list'),
             get_string('activity', 'report_rubric_list'),
             get_string('course')
-        );
+        ];
         $this->define_headers($headers);
     }
 
@@ -73,7 +73,7 @@ class table extends \table_sql {
             return $values->name;
         } else {
             return \html_writer::link(
-                new \moodle_url("/grade/grading/manage.php", array('areaid' => $values->areaid)),
+                new \moodle_url("/grade/grading/manage.php", ['areaid' => $values->areaid]),
                 $values->name
             );
         }
@@ -92,7 +92,7 @@ class table extends \table_sql {
         if ($this->is_downloading()) {
             return $values->course;
         } else {
-            return \html_writer::link(new \moodle_url("/course/view.php", array('id' => $values->courseid)), $values->course);
+            return \html_writer::link(new \moodle_url("/course/view.php", ['id' => $values->courseid]), $values->course);
         }
     }
 
@@ -133,7 +133,7 @@ class table extends \table_sql {
         if ($this->is_downloading()) {
             return $name;
         } else {
-            return \html_writer::link(new \moodle_url($url, array('id' => $id)), $name);
+            return \html_writer::link(new \moodle_url($url, ['id' => $id]), $name);
         }
     }
 

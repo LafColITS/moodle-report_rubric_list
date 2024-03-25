@@ -26,13 +26,13 @@ require_once(dirname(__FILE__) . '/../../config.php');
 require_once('./classes/rubric_list_table.php');
 
 $id = required_param('id', PARAM_INT);
-$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
 $download = optional_param('download', '', PARAM_ALPHA);
 
 require_login($course);
 
 // Setup page.
-$PAGE->set_url('/report/rubric_list/index.php', array('id' => $course->id));
+$PAGE->set_url('/report/rubric_list/index.php', ['id' => $course->id]);
 $PAGE->set_pagelayout('report');
 
 // Check permissions.
@@ -50,7 +50,8 @@ if (!$table->is_downloading()) {
 }
 
 $table->set_sql(
-    "gd.id, gd.areaid, gd.name, gd.usercreated, gd.copiedfromid, gd.timemodified, c.id as courseid, c.fullname as course, cm.id as cmid, m.name as modtype,
+    "gd.id, gd.areaid, gd.name, gd.usercreated, gd.copiedfromid, gd.timemodified,
+    c.id as courseid, c.fullname as course, cm.id as cmid, m.name as modtype,
     f.name as forum, a.name as assignment",
     "{grading_definitions} gd JOIN {grading_areas} ga ON (gd.areaid =ga.id) JOIN {context} cx ON (ga.contextid = cx.id)
     JOIN {course_modules} cm

@@ -27,6 +27,7 @@ namespace report_rubric_list;
 defined('MOODLE_INTERNAL') || die;
 
 require_once("$CFG->libdir/tablelib.php");
+require_once("$CFG->dirroot/grade/grading/form/guide/lib.php");
 
 /**
  * Query database for rubrics and format output
@@ -45,7 +46,7 @@ class table extends \table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = ['name', 'timemodified', 'modtype', 'module', 'course'];
+        $columns = ['name', 'timemodified', 'modtype', 'module', 'status', 'course'];
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
@@ -54,6 +55,7 @@ class table extends \table_sql {
             get_string('last_updated', 'report_rubric_list'),
             get_string('activity_type', 'report_rubric_list'),
             get_string('activity', 'report_rubric_list'),
+            get_string('status'),
             get_string('course')
         ];
         $this->define_headers($headers);
@@ -77,6 +79,21 @@ class table extends \table_sql {
                 $values->name
             );
         }
+    }
+
+    /**
+     * This function is called for each data row to allow processing of the
+     * rubric status value.
+     *
+     * @param object $values Contains object with all the values of record.
+     * @return $string Return string representation of rubric status.
+     */
+    protected function col_status($values) {
+        $choices = [
+            \gradingform_controller::DEFINITION_STATUS_DRAFT => 'statusdraft',
+            \gradingform_controller::DEFINITION_STATUS_READY => 'statusready'
+        ];
+        return get_string($choices[$values->status], 'core_grading');
     }
 
     /**

@@ -90,9 +90,9 @@ class table extends \table_sql {
     protected function col_course($values) {
         // If the data is being downloaded than we don't want to show HTML.
         if ($this->is_downloading()) {
-            return $values->fullname;
+            return $values->course;
         } else {
-            return \html_writer::link(new \moodle_url("/course/view.php", array('id' => $values->courseid)), $values->fullname);
+            return \html_writer::link(new \moodle_url("/course/view.php", array('id' => $values->courseid)), $values->course);
         }
     }
 

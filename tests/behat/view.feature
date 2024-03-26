@@ -85,6 +85,7 @@ Feature: View all my rubrics
     And I navigate to "Reports" in current page administration
     And I click on "Rubric list" "link"
     And I should see "Assignment 1 rubric"
+    And I should see "Ready for use"
     And I should not see "Assignment 3 rubric"
     And I log in as "teacher2"
     And I am on "Course 4" course homepage

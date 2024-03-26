@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2024011200;
+$plugin->version   = 2024011201;
 $plugin->requires  = 2022041900;
 $plugin->component = 'report_rubric_list';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v4.1.0';
+$plugin->release   = 'v4.1.1';

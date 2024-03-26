@@ -1,6 +1,6 @@
 # Rubric list
 
-![moodle-ci](https://github.com/LafColITS/moodle-report_rubric_list/workflows/moodle-ci/badge.svg)
+![moodle-ci](https://github.com/LafColITS/moodle-report_rubric_list/actions/workflows/moodle-ci.yml/badge.svg)
 
 This is a simple report which lists all rubrics a user has created.
 

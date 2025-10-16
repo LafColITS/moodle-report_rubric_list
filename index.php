@@ -44,7 +44,7 @@ $table = new report_rubric_list\table($USER->id);
 $table->is_downloading($download, get_string('rubric_list_filename', 'report_rubric_list'));
 
 if (!$table->is_downloading()) {
-    $PAGE->set_title($course->shortname .': '. get_string('pluginname', 'report_rubric_list'));
+    $PAGE->set_title($course->shortname . ': ' . get_string('pluginname', 'report_rubric_list'));
     $PAGE->set_heading($course->fullname);
     echo $OUTPUT->header();
 }

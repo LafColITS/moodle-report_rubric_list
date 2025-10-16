@@ -37,7 +37,6 @@ require_once("$CFG->dirroot/grade/grading/form/guide/lib.php");
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class table extends \table_sql {
-
     /**
      * Constructor
      * @param int $uniqueid all tables have to have a unique id, this is used
@@ -133,7 +132,7 @@ class table extends \table_sql {
      * with link to the module grading area or name only when downloading.
      */
     protected function col_module($values) {
-        switch($values->modtype) {
+        switch ($values->modtype) {
             case 'assign':
                 $id = $values->cmid;
                 $name = $values->assignment;

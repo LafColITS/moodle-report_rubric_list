@@ -32,7 +32,13 @@
 function report_rubric_list_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('report/rubric_list:view', $context)) {
         $url = new moodle_url('/report/rubric_list/index.php', ['id' => $course->id]);
-        $navigation->add(get_string('pluginname', 'report_rubric_list'), $url,
-                navigation_node::TYPE_SETTING, null, null, new pix_icon('i/report', ''));
+        $navigation->add(
+            get_string('pluginname', 'report_rubric_list'),
+            $url,
+            navigation_node::TYPE_SETTING,
+            null,
+            null,
+            new pix_icon('i/report', '')
+        );
     }
 }
